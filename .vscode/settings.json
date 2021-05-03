@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.h": "c",
+        "*.rmd": "markdown",
+        "*.vertexshader": "glsl",
+        "*.fragmentshader": "glsl",
+        "*.mcmeta": "json",
+        "*.mcfunction": "json",
+        "*.bak": "cpp"
+    }
+}
