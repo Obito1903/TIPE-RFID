@@ -61,8 +61,6 @@ static void NDEF_ParseSP(sRecordInfo_t *pRecordStruct);
 static uint16_t NDEF_IdentifySPRecord(sRecordInfo_t *pRecordStruct,
                                       uint8_t *pPayload);
 
-uint8_t NDEF_Buffer[NDEF_MAX_SIZE];
-
 /* In case of smart Poster composed with different record, 2 records supported
  * so far */
 sRecordInfo_t SPRecordStruct1, SPRecordStruct2;

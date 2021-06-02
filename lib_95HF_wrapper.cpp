@@ -43,20 +43,20 @@ extern TagType_t nfc_tagtype;
 
 bool updateFlash = false;
 
-/* Tag type 1 */
-extern uint8_t TT1Tag[];
+// /* Tag type 1 */
+// extern uint8_t TT1Tag[];
 
-/* Tag type 2 */
-extern uint8_t TT2Tag[];
+// /* Tag type 2 */
+// extern uint8_t TT2Tag[];
 
-/* Tag type 3 */
-extern uint8_t TT3Tag[];
-extern uint8_t *TT3AttribInfo, *TT3NDEFfile;
+// /* Tag type 3 */
+// extern uint8_t TT3Tag[];
+// extern uint8_t *TT3AttribInfo, *TT3NDEFfile;
 
 /* Tag type 4 */
 /* NDEF buffer */
-extern uint8_t CardNDEFfileT4A[];
-extern uint8_t CardNDEFfileT4B[];
+// extern uint8_t CardNDEFfileT4A[];
+// extern uint8_t CardNDEFfileT4B[];
 /* CC buffer*/
 extern uint8_t CardCCfile[];
 

@@ -40,7 +40,8 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "lib_NDEF_Text.h"
+//#include "lib_NDEF_Text.h"
+#include "lib_NDEF.h"
 #include "lib_iso15693pcd.h"
 #include "lib_nfctype5pcd.h"
 
@@ -58,15 +59,15 @@ For type A you can also adjust the Timer Window
 */
 
 /******************  PICC  ******************/
-/* ISO14443A */
-#define PICC_TYPEA_ACConfigA 0x27 /* backscaterring */
+// /* ISO14443A */
+// #define PICC_TYPEA_ACConfigA 0x27 /* backscaterring */
 
-/* ISO14443B */
-#define PICC_TYPEB_ARConfigD 0x0E /* card demodulation gain */
-#define PICC_TYPEB_ACConfigA 0x17 /* backscaterring */
+// /* ISO14443B */
+// #define PICC_TYPEB_ARConfigD 0x0E /* card demodulation gain */
+// #define PICC_TYPEB_ACConfigA 0x17 /* backscaterring */
 
-/* Felica */
-#define PICC_TYPEF_ACConfigA 0x17 /* backscaterring */
+// /* Felica */
+// #define PICC_TYPEF_ACConfigA 0x17 /* backscaterring */
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -89,15 +90,15 @@ For type A you can also adjust the Timer Window
 /* TT5 (PCD only)*/
 uint8_t TT5Tag[NFCT5_MAX_TAGMEMORY];
 
-extern uint8_t NDEF_Buffer[NFCT5_MAX_TAGMEMORY];
 extern DeviceMode_t devicemode;
 
 int8_t TagType = TRACK_NOTHING;
 bool TagDetected = false;
 uint8_t status = ERRORCODE_GENERIC;
-// static char dataOut[16];
+// char dataOut[512];
 
 sRecordInfo_t info;
+sRecordInfo_t info2;
 
 #define X_NUCLEO_NFC03A1_LED1 7
 #define X_NUCLEO_NFC03A1_LED2 6
@@ -148,24 +149,22 @@ void loop() {
   } break;
   }
   digitalWrite(X_NUCLEO_NFC03A1_LED2, LOW);
-  delay(300);
+  delay(500);
   digitalWrite(X_NUCLEO_NFC03A1_LED2, HIGH);
   if (TagDetected == true) {
     TagDetected = false;
 
     status = PCDNFCT5_ReadNDEF();
     if (status == PCDNFCT5_OK) {
-      if (NDEF_IdentifyNDEF(&info, TT5Tag) == NDEF_OK) {
-        for (size_t i = 0; i < &info->PayloadOffset; i++) {
-          SerialPort.print((char)TT5Tag[i]);
-        }
-        Serial.print("\n");
+      Serial.println("Debut");
+      for (size_t i = 0; i < NFCT5_MAX_TAGMEMORY; i++) {
+        SerialPort.println(TT5Tag[i]);
       }
+      Serial.println("Fin");
     } else if (status == PCDNFCT5_ERROR_LOCKED) {
       SerialPort.println("Tag bloque");
     } else if (status == PCDNFCT5_ERROR_NOT_FORMATED) {
       SerialPort.println("Not formated");
-      NDEF_WriteText("Salut");
     } else if (status == PCDNFCT5_ERROR_MEMORY_INTERNAL) {
       SerialPort.println("Memory");
     } else {
